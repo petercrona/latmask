@@ -1,0 +1,24 @@
+{
+  "name": "latmask",
+  "version": "0.0.1",
+  "description": "",
+  "main": "latmask.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node latmask.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petercrona/latmask.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petercrona/latmask/issues"
+  },
+  "homepage": "https://github.com/petercrona/latmask#readme",
+  "dependencies": {
+    "filewalker": "^0.1.2",
+    "kling": "0.0.2"
+  }
+}
