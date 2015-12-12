@@ -4,8 +4,8 @@
   "description": "",
   "main": "latmask.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node latmask.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node latmask.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/petercrona/latmask#readme",
   "dependencies": {
     "filewalker": "^0.1.2",
-    "kling": "0.0.2"
+    "kling": "0.0.2",
+    "sluka": "0.0.6"
   }
 }
