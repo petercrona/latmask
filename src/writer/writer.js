@@ -7,7 +7,11 @@ var _ = require('kling/kling.js');
 var fs = require('fs');
 
 function write(path, content) {
-    fs.writeFile(camelToDash(path), content, 'utf8');
+    var title = path.substring(2, path.lastIndexOf('.'));
+    var firstChar = title[0].toUpperCase();
+    title = firstChar + title.substring(1);
+    content = '\n' + title + '\n----------------------\n' + content;
+    fs.writeFile(camelToDash(path), content + '\n', 'utf8');
 }
 
 function camelToDash(str) {
@@ -36,7 +40,7 @@ function toJs(file, parsedResult) {
     var urlRewrites = getRewrites(placeHolder);
     baseUrl = url(baseUrl, urlRewrites);
 
-    var buffer = writeAngularInitialBoilerPlate(resourceName, baseUrl, file.name);
+    var buffer = '';
 
     var parsedResultRenamed = renameDuplicates(parsedResult);
     parsedResultRenamed = renameReserved(parsedResultRenamed);
@@ -46,10 +50,6 @@ function toJs(file, parsedResult) {
             buffer = buffer + writeMethod(x, urlRewrites);
         }
     });
-
-    buffer = removeLastComma(buffer);
-
-    buffer = buffer + writeAngularTailBoilerPlate(resourceName, baseUrl);
 
     return {
         name: resourceName,
@@ -167,16 +167,15 @@ function writeMethod(method, urlRewrites) {
     var idnt2 = _.curry(writeLn)(2);
     var idnt3 = _.curry(writeLn)(3);
 
-    var text = idnt2(method.name + ': {');
-    text = text + idnt3('method: \'' + method.method + '\',');
+    var text = method.name;
+    text += ' (' + method.method + '): ';
+    text += url(method.value, urlRewrites);
 
     if (isReturnTypeCollection(method.returnType)) {
-        text = text + idnt3('isArray: true,');
+        text += ' - returns an array';
     }
 
-    text = text + idnt3('url: \'' + url(method.value, urlRewrites) + '\'');
-
-    text = text + idnt2('},');
+    text += '\n';
 
     return text;
 }
